@@ -1,0 +1,275 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular.min.js"></script>
+	<script type="text/javascript">
+		
+
+	</script>
+	<style>
+	.btn{
+		width: 200px;
+		padding: 15px 32px;
+		text-align: center;
+	}
+
+	.leds{			
+		margin: 0 auto;
+		padding-top: 50px;
+		height: 70%;
+		min-height: 70%;
+		width: 100%;
+		min-width: 80%;
+		
+	}
+
+	.leds-background{
+		margin: 0 auto;
+		height: 10%;
+		width:  5%;
+		margin-top: 25px;
+		padding-top: 50px;
+		margin-left: 200px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		background: #ccc;
+		float: left;
+	}
+
+	.leds-blinky-background{
+		margin: 0 auto;
+		height: 10%;
+		width:  5%;
+		margin-top: 25px;
+		padding-top: 50px;
+		margin-left: 200px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		background: #ccc;
+		float: left;
+		animation: blinkYellow 0.5s infinite;
+	}
+
+	.leds-blinkg-background{
+		margin: 0 auto;
+		height: 10%;
+		width:  5%;
+		margin-top: 25px;
+		padding-top: 50px;
+		margin-left: 200px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		background: #ccc;
+		float: left;
+		animation: blinkGreen 0.5s infinite;
+	}
+
+	.leds-blinkr-background{
+		margin: 0 auto;
+		height: 10%;
+		width:  5%;
+		margin-top: 25px;
+		padding-top: 50px;
+		margin-left: 200px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		background: #ccc;
+		float: left;
+		animation: blinkRed 0.5s infinite;
+	}
+	@keyframes blinkYellow {
+		from { background-color: yellow; }
+    	50% { background-color: #CCC;}
+    	to { background-color: yellow; }
+	}
+
+	@keyframes blinkGreen {
+		from { background-color: green; }
+    	50% { background-color: #CCC;}
+    	to { background-color: green; }
+	}
+
+	@keyframes blinkRed {
+		from { background-color: red; }
+    	50% { background-color: #CCC;}
+    	to { background-color: red; }
+	}	
+
+	.navbar-header {
+		float: left;
+		padding: 20px;
+		text-align: center;
+		width: 100%;
+	}
+
+	.navbar-default{
+		background: #112273;
+		text-align: center;
+		padding-top: 15px;
+
+	}
+
+	.navbar-default .navbar-brand{
+		color : #FFF;		
+		float: none;
+	}
+
+	.navbar-default .navbar-brand:hover{
+		color : #FFF;
+	}
+
+	.temperatura{
+		margin: 0 auto;
+		text-align: center;
+		height: 70%;
+	}
+	
+	.btns{
+		padding-left: 4%;
+	}
+
+
+	#termo{
+		margin: 0 auto;
+		padding-top: 20px;
+		height: 20%;
+		width: 70%;
+	}
+
+	.temperatura-border{
+		border: 1px solid;
+		
+	}
+
+	.temperatura-color{
+		background: #ccc;
+	}
+
+	.temperatura-color2{
+		background: red;
+		color: white;
+	}
+
+	.temperatura-color3{
+		background: blue;
+		color: white;
+	}
+
+</style>
+</head>
+<body ng-app="UserManagement" ng-controller="UserManagementController">
+
+	<input type="hidden" id="valServ" name="valServ">
+
+	<nav class="navbar navbar-default">
+		<a class="navbar-brand" href="#">Johnny-five.JS</a>
+	</nav>
+
+	<div class="container " role="main">
+
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#leds">Servo</a></li>
+			<li><a data-toggle="tab" href="#menu1">Thermomether</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="leds" class="tab-pane fade in active">
+				<div class="row leds">
+					<div class=" col-md-offset-4 btns">
+						<button ng-click="encender();" id="b_on" type="button" class="btn btn-lg btn-primary">ON</button>
+						<button ng-click="apagar();" id="b_off" type="button" class="btn btn-lg btn-danger">OFF</button>
+						{{hola}}
+					</div>
+					<br>
+				</div>
+			</div>
+			<div id="menu1" class="tab-pane fade">
+				<div class="temperatura">
+					<div id="termo">
+						<button ng-click="temperatura();" id="b_on" type="button" class="btn btn-lg btn-primary">Consultar</button>
+						<h1  id="h1Temp" class="temperatura-border temperatura-color" > <span  id="temperatura"></span> {{temp}} °C </h1>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="angular-socket-io-master/socket.js"></script>
+<script>
+
+	var app = angular.module('UserManagement', ['btford.socket-io']).
+	factory('mySocket', function (socketFactory) {
+		var Isocket = io('');
+		mySocket = socketFactory({
+		    ioSocket: Isocket
+		  });
+  		return socketFactory();
+	}).
+	controller('UserManagementController', function($scope,mySocket,$http){
+
+		$scope.valorServicio = "";
+
+		$scope.encender = function(){
+				$http.get("http://206.189.234.255:4001/motorE").
+				then(function(response){
+					console.log(response.data);
+					mySocket.emit(response.data);
+					document.getElementById('valServ').value=response.data;
+				});
+		}
+
+		$scope.apagar = function(){
+			$http.get("http://206.189.234.255:4001/motor").
+				then(function(response){
+					console.log(response.data);
+					mySocket.emit(response.data);
+					document.getElementById('valServ').value=response.data;
+				});			
+		}
+
+
+		$scope.temperatura = function(){
+			$http.get("http://206.189.234.255:4000/temperatua").
+				then(function(response){
+					$scope.valorServicio = response.data;
+					console.log(response.data);
+					mySocket.emit(response.data);
+					document.getElementById('valServ').value=response.data;
+				});			
+		}
+
+		mySocket.on('onServer',function(data){
+			console.log("pase el "+data);
+		});
+
+		mySocket.on('offServer',function(data){
+			console.log("pase el "+data);
+		});
+
+		mySocket.on('temp',function(data){
+			$scope.temp = data;
+
+			if(data > 40){
+				document.getElementById("h1Temp").classList.remove('temperatura-color');
+				document.getElementById("h1Temp").classList.remove('temperatura-color3');
+				document.getElementById("h1Temp").classList.add('temperatura-color2');
+			}else if(data < 10){
+				document.getElementById("h1Temp").classList.remove('temperatura-color');
+				document.getElementById("h1Temp").classList.remove('temperatura-color2');
+				document.getElementById("h1Temp").classList.add('temperatura-color3');
+			}else{
+				document.getElementById("h1Temp").classList.remove('temperatura-color2');
+				document.getElementById("h1Temp").classList.remove('temperatura-color3');
+				document.getElementById("h1Temp").classList.add('temperatura-color');
+			}
+		});
+
+	});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  leds:
+    build: .\leds
+    ports:
+     - "4000:4000"
+    command: node index.js  
+    
+  motor:
+    build: .\motor
+    ports:
+     - "4001:4001"
+    command: node index.js             
+
+  web:
+    build: .\web
+    ports:
+     - "8083:8083"
+    command: node index.js                 
