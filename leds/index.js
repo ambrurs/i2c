@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
-var five = require('johnny-five');
 
 
 app.use(bodyParser.json());
