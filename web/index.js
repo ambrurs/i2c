@@ -30,7 +30,8 @@ app.get('/', function (req,res) {
           });
 
 
-          socket.on('temperatua', function(data){
+          socket.on('temperatua', function(){
+            console.log("Entre a revisar la temperatura");
             socket.broadcast.emit('temp', data);
           });
 
