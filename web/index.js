@@ -34,6 +34,10 @@ app.get('/', function (req,res) {
             socket.broadcast.emit('temp', data);
           });
 
+          socket.on('tempResponse', function(data){
+            socket.broadcast.emit('temp', data);
+          });
+
 
     });
 
